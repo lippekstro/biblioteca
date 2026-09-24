@@ -140,6 +140,39 @@ class Categoria
         }
     }
 
+    // metodo para atualizar os dados do item baseado no id
+    // faz parte do U (Update) do CRUD
+    public function atualizar($nome, $id)
+    {
+        // usamos try/catch quando existe possibilidade de erro, principalmente ao usar banco de dados
+        // o try é onde tentamos executar o código
+        try {
+            // chama o método conectar() da classe Conexao
+            // cria uma conexão configurada e guarda na variável $conexao
+            $conexao = Conexao::conectar();
+
+            // comando SQL responsável por atualizar o nome de uma categoria
+            // :nome e :id são espaços reservados para os valores que serão utilizados
+            $sql = "UPDATE categoria SET nome = :nome WHERE id_categoria = :id";
+
+            // prepara o SQL para executar
+            $stmt = $conexao->prepare($sql);
+
+            // coloca o valor de $nome no espaço reservado :nome
+            $stmt->bindValue(':nome', $nome);
+
+            // coloca o valor de $id no espaço reservado :id
+            $stmt->bindValue(':id', $id);
+
+            // executa o comando no banco
+            $stmt->execute();
+        } catch (PDOException $e) { // executa caso aconteça um erro
+            // mostra o erro encontrado
+            echo $e->getMessage();
+        }
+    }
+
+
 
 
 
