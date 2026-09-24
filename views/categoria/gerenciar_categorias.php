@@ -17,8 +17,8 @@ $resultado = Categoria::listar();
         <?php foreach($resultado as $categoria): ?>
             <tr>
                 <td><?= $categoria['nome'] ?></td>
-                <td>Editar</td>
-                <td>Deletar</td>
+                <td><a href="/biblioteca/views/categoria/editar_categoria.php?id=<?= $categoria['id_categoria'] ?>">Editar</a></td>
+                <td><a href="/biblioteca/controllers/categoria_del_controller.php?id=<?= $categoria['id_categoria'] ?>">Deletar</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../templates/_cabecalho.php";
 ?>
 
 <main class="main-detalhe">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/biblioteca/controllers/categoria_add_controller.php" method="post" enctype="multipart/form-data">
 
         <div class="form-item">
             <label for="nome">Nome Da Categoria</label>
