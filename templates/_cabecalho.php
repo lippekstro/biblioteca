@@ -11,6 +11,8 @@ require_once __DIR__ . "/../auth/autenticacao.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca</title>
 
+    <link rel="shortcut icon" href="/biblioteca/imgs/favicon.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="/biblioteca/css/style.css">
 
     <script src="/biblioteca/js/script.js" defer></script>
