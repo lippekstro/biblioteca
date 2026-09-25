@@ -18,7 +18,7 @@ $resultado = Categoria::listar();
             <tr>
                 <td><?= $categoria['nome'] ?></td>
                 <td><a href="/biblioteca/views/categoria/editar_categoria.php?id=<?= $categoria['id_categoria'] ?>">Editar</a></td>
-                <td><a href="/biblioteca/controllers/categoria_del_controller.php?id=<?= $categoria['id_categoria'] ?>">Deletar</a></td>
+                <td><a href="/biblioteca/controllers/categoria_del_controller.php?id=<?= $categoria['id_categoria'] ?>" onclick="return confirm('Tem certeza que deseja deletar esta categoria?')">Deletar</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
