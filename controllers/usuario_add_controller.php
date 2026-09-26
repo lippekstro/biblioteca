@@ -33,7 +33,7 @@ if(!empty($_FILES['foto']['name'])) {
 } else {
 
     // define a foto como null caso nenhuma foto tenha sido enviada
-    $foto = null;
+    $nomedafoto = null;
 }
 
 // cria um novo objeto da classe Usuario
@@ -42,7 +42,7 @@ $usuario = New Usuario();
 
 // chama o método inserir() da classe Usuario
 // envia o nome, email, senha e foto para serem cadastrados no banco
-$usuario->inserir($nome, $email, $senha, $foto);
+$usuario->inserir($nome, $email, $senha, $nomedafoto);
 
 // redireciona o usuário para a página de login
 header('Location: /biblioteca/views/usuario/login.php');
