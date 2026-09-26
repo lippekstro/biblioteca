@@ -14,7 +14,7 @@ $resultado = Categoria::listar();
             <th colspan="2">Opções</th>
         </tr>
 
-        <?php foreach($resultado as $categoria): ?>
+        <?php foreach ($resultado as $categoria): ?>
             <tr>
                 <td><?= $categoria['nome'] ?></td>
                 <td><a href="/biblioteca/views/categoria/editar_categoria.php?id=<?= $categoria['id_categoria'] ?>">Editar</a></td>

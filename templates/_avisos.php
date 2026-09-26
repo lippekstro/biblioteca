@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['aviso'])): ?>
+<?php if (isset($_SESSION['aviso'])): ?>
     <section class="avisos">
         <div>
             <p><?= $_SESSION['aviso'] ?></p>

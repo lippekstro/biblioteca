@@ -30,8 +30,8 @@ $livros = Livro::listar();
                 <td><?= $l['titulo'] ?></td>
                 <td><?= $l['ano_pub'] ?></td>
                 <td><?= $l['nome'] ?></td>
-                <td>Editar</td>
-                <td>Deletar</td>
+                <td><a href="/biblioteca/views/livro/editar_livro.php?id=<?= $l['id_livro'] ?>">Editar</a></td>
+                <td><a href="/biblioteca/controllers/livro_del_controller.php?id=<?= $l['id_livro'] ?>" onclick="return confirm('Tem certeza que deseja deletar este livro?')">Deletar</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

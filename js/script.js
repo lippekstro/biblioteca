@@ -4,9 +4,9 @@ let senha = document.getElementById('senha')
 let visivel = false
 
 // criar um evento de click no olho
-olho.addEventListener('click', ()=>{
+olho.addEventListener('click', () => {
     // ao clicar, abre o olho e exibe o valor do campo
-    if(visivel == false){
+    if (visivel == false) {
         olho.src = "/biblioteca/imgs/olho_aberto.png"
         senha.type = "text"
         visivel = true

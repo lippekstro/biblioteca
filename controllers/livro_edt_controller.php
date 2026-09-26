@@ -2,11 +2,14 @@
 require_once __DIR__ . "/../models/livro.php";
 session_start();
 
+$id = $_POST['id'];
 $titulo = $_POST['titulo'];
 $ano = $_POST['ano'];
 $autor = $_POST['autor'];
 $resumo = $_POST['resumo'];
-$cat = $_POST['categoria'];
+$categoria = $_POST['categoria'];
+
+$livro = new Livro();
 
 if (!empty($_FILES['capa']['name'])) {
     $capa = $_FILES['capa'];
@@ -14,13 +17,14 @@ if (!empty($_FILES['capa']['name'])) {
     $nomedacapa = uniqid() . '.' . $extensao;
     $caminho = __DIR__ . "/../imgs/capas/uploads/" . $nomedacapa;
     move_uploaded_file($capa['tmp_name'], $caminho);
+    $livro->atualizar($titulo, $autor, $ano, $resumo, $nomedacapa, $categoria, $id);
 } else {
-    $nomedacapa = null;
+    $livro->atualizarSemCapa($titulo, $autor, $ano, $resumo, $categoria, $id);
 }
 
-$livro = new Livro();
-$livro->inserir($titulo, $ano, $autor, $resumo, $nomedacapa, $cat);
 
-$_SESSION['aviso'] = "Livro inserido com sucesso";
+
+
+$_SESSION['aviso'] = "Livro atualizado com sucesso";
 header('Location: /biblioteca/views/livro/gerenciar_livros.php');
 exit();

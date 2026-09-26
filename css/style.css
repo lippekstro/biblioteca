@@ -1,4 +1,3 @@
-
 :root {
     --prim: #0fa3b1;
     --sec: #fff;
@@ -12,7 +11,8 @@
     font-family: sans-serif;
 }
 
-header, footer {
+header,
+footer {
     background-color: var(--prim);
     color: var(--sec);
     padding: 1rem;
@@ -22,7 +22,7 @@ header, footer {
 .logo {
     width: 50px;
     height: 50px;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
 header {
@@ -86,7 +86,7 @@ h1 {
     box-shadow: 5px 5px 10px 0 black;
 }
 
-.card-img img{
+.card-img img {
     width: 100%;
     height: 200px;
     object-fit: fill;
@@ -141,7 +141,9 @@ form {
     width: 100%;
 }
 
-.form-item input, .form-item textarea, .form-item select {
+.form-item input,
+.form-item textarea,
+.form-item select {
     border-radius: 8px;
     padding: 0.5rem;
     border: none;
@@ -174,7 +176,9 @@ table {
     width: 100%;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid var(--prim);
     border-collapse: collapse;
     padding: 1rem;
@@ -252,7 +256,7 @@ table img {
     .card-container {
         grid-template-columns: repeat(1, 1fr);
     }
-    
+
     header {
         flex-direction: column;
     }

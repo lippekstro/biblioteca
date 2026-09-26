@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-if(!$livro) {
+if (!$livro) {
     header("Location: /biblioteca/index.php");
     exit();
 }

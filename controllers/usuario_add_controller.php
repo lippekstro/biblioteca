@@ -12,7 +12,7 @@ $senha = $_POST['senha'];
 $senha = password_hash($senha, PASSWORD_DEFAULT);
 
 // verifica se o usuário enviou uma foto
-if(!empty($_FILES['foto']['name'])) {
+if (!empty($_FILES['foto']['name'])) {
 
     // pega os dados do arquivo enviado
     $foto = $_FILES['foto'];
@@ -29,7 +29,6 @@ if(!empty($_FILES['foto']['name'])) {
 
     // move a foto enviada para a pasta de uploads
     move_uploaded_file($foto['tmp_name'], $caminho);
-
 } else {
 
     // define a foto como null caso nenhuma foto tenha sido enviada
@@ -38,7 +37,7 @@ if(!empty($_FILES['foto']['name'])) {
 
 // cria um novo objeto da classe Usuario
 // o objeto será utilizado para chamar o método inserir()
-$usuario = New Usuario();
+$usuario = new Usuario();
 
 // chama o método inserir() da classe Usuario
 // envia o nome, email, senha e foto para serem cadastrados no banco

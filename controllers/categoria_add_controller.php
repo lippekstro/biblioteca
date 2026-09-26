@@ -10,7 +10,7 @@ session_start();
 $nome = $_POST['nome'];
 
 // cria um novo objeto da classe Categoria
-$categoria = New Categoria();
+$categoria = new Categoria();
 
 // chama o método inserir() da classe Categoria
 // envia o nome recebido do formulário para ser inserido no banco de dados

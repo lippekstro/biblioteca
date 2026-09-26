@@ -110,3 +110,5 @@ http://localhost/biblioteca/
 ```
 
 A página inicial do sistema será carregada.
+
+> É necessario criar a pasta `uploads` dentro de `/imgs/fotos/` e também dentro de `/imgs/capas/`
