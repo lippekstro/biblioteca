@@ -5,12 +5,25 @@ require_once __DIR__ . "/../configs/conexao.php";
 // classe responsável pelas funções de autenticação do usuário
 class Autenticacao
 {
+
+    // metodo para iniciar sessao
+    // escrito dessa forma evita o aviso de sessao ja foi iniciada
+    // quando temos solicitacoes diferentes que fazem session_start na mesma pagina
+    public static function iniciarSessao()
+    {
+        // verifica se o status da sessao é inexistente
+        if (session_status() === PHP_SESSION_NONE) {
+            // se for inexistente inicializa, senao, mantem a sessao que ja existe
+            session_start();
+        }
+    }
+
     // método responsável por realizar o login do usuário
     // recebe o email e a senha informados no formulário de login
     public static function logar($email, $senha)
     {
         // inicia a sessão para permitir o armazenamento de informações do usuário
-        session_start();
+        self::iniciarSessao();
 
         // comando SQL responsável por buscar um usuário pelo email
         // :email é um espaço reservado para o email informado
@@ -49,6 +62,8 @@ class Autenticacao
             // armazena a foto do usuário na sessão
             $_SESSION['foto'] = $usuario['foto'];
 
+            $_SESSION['nivel_acesso'] = $usuario['nivel_acesso'];
+
             // redireciona o usuário para a página de perfil
             header('Location: /biblioteca/views/usuario/perfil.php');
 
@@ -71,7 +86,7 @@ class Autenticacao
     public static function estaAutenticado()
     {
         // inicia a sessão para poder acessar os dados armazenados
-        session_start();
+        self::iniciarSessao();
 
         // verifica se existe um ID de usuário armazenado na sessão
         // retorna true se o ID existir e false caso não exista
@@ -82,7 +97,7 @@ class Autenticacao
     public static function logout()
     {
         // inicia a sessão para poder acessar os dados armazenados
-        session_start();
+        self::iniciarSessao();
 
         // limpa todos os dados armazenados na sessão
         $_SESSION = [];
@@ -110,6 +125,21 @@ class Autenticacao
             header("Location: /biblioteca/views/usuario/login.php");
 
             // encerra a execução do código
+            exit();
+        }
+    }
+
+    public static function ehAdmin()
+    {
+        self::iniciarSessao();
+        return $_SESSION['nivel_acesso'] == 2;
+    }
+
+    public static function logadoEAdmin()
+    {
+        if (!self::estaAutenticado() || !self::ehAdmin()) {
+            $_SESSION['aviso'] = "Voce nao tem autorizacao";
+            header('Location: /biblioteca/views/usuario/login.php');
             exit();
         }
     }

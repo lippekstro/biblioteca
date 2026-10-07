@@ -2,6 +2,8 @@
 require_once __DIR__ . "/../../templates/_cabecalho.php";
 require_once __DIR__ . "/../../models/livro.php";
 
+Autenticacao::logadoEAdmin();
+
 $livros = Livro::listar();
 
 ?>

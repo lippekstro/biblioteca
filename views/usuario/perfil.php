@@ -15,10 +15,13 @@ require_once __DIR__ . "/../../templates/_cabecalho.php";
                 <img src="/biblioteca/imgs/fotos/uploads/<?= $_SESSION['foto'] ?>" alt="">
             <?php endif; ?>
         </div>
-        <div class="itens-perfil">
-            <a href="/biblioteca/views/categoria/gerenciar_categorias.php" class="link-btn">Gerenciar Categorias</a>
-            <a href="/biblioteca/views/livro/gerenciar_livros.php" class="link-btn">Gerenciar Livros</a>
-        </div>
+
+        <?php if(Autenticacao::ehAdmin()): ?>
+            <div class="itens-perfil">
+                <a href="/biblioteca/views/categoria/gerenciar_categorias.php" class="link-btn">Gerenciar Categorias</a>
+                <a href="/biblioteca/views/livro/gerenciar_livros.php" class="link-btn">Gerenciar Livros</a>
+            </div>
+        <?php endif; ?>
     </div>
 </main>
 
