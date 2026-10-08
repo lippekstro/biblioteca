@@ -7,8 +7,7 @@ $categorias = Categoria::listar();
 
 $id = $_GET['id'];
 
-$livro = new Livro();
-$livro->carregar($id);
+$livro = new Livro($id);
 
 ?>
 
@@ -17,17 +16,17 @@ $livro->carregar($id);
 
         <div class="form-item">
             <label for="titulo">Titulo</label>
-            <input type="text" name="titulo" id="titulo" value="<?= $livro->getTitulo() ?>">
+            <input type="text" name="titulo" id="titulo" value="<?= $livro->getTitulo() ?>" required>
         </div>
 
         <div class="form-item">
             <label for="ano">Ano da Publicacao</label>
-            <input type="text" name="ano" id="ano" max="2026" value="<?= $livro->getAno() ?>">
+            <input type="text" name="ano" id="ano" max="2026" value="<?= $livro->getAno() ?>" required>
         </div>
 
         <div class="form-item">
             <label for="autor">Autor</label>
-            <input type="text" name="autor" id="autor" value="<?= $livro->getAutor() ?>">
+            <input type="text" name="autor" id="autor" value="<?= $livro->getAutor() ?>" required>
         </div>
 
         <div class="form-item">

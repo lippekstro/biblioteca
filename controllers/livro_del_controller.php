@@ -5,7 +5,8 @@ session_start();
 $id = $_GET['id'];
 
 $livro = new Livro();
-$livro->deletar($id);
+$livro->setId($id);
+$livro->deletar();
 
 $_SESSION['aviso'] = "Livro deletada com sucesso";
 header('Location: /biblioteca/views/livro/gerenciar_livros.php');

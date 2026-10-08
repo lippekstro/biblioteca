@@ -4,8 +4,7 @@ require_once __DIR__ . "/../../models/categoria.php";
 
 $id = $_GET['id'];
 
-$categoria = new Categoria;
-$categoria->carregar($id);
+$categoria = new Categoria($id);
 
 
 
@@ -19,7 +18,7 @@ $categoria->carregar($id);
             <input type="text" name="nome" id="nome" value="<?= $categoria->getNome() ?>">
         </div>
 
-        <input type="hidden" name="id" value="<?= $categoria->getId() ?>">
+        <input type="hidden" name="id" value="<?= $categoria->getId() ?>" required>
 
         <button type="submit">Atualizar</button>
     </form>

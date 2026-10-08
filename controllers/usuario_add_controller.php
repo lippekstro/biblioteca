@@ -36,12 +36,18 @@ if (!empty($_FILES['foto']['name'])) {
 }
 
 // cria um novo objeto da classe Usuario
-// o objeto será utilizado para chamar o método inserir()
+// o objeto será utilizado para chamar o método inserir() e para receber os valores
 $usuario = new Usuario();
 
+// atribuo cada valor
+$usuario->setNome($nome);
+$usuario->setEmail($email);
+$usuario->setSenha($senha);
+$usuario->setFoto($nomedafoto);
+
 // chama o método inserir() da classe Usuario
-// envia o nome, email, senha e foto para serem cadastrados no banco
-$usuario->inserir($nome, $email, $senha, $nomedafoto);
+// envia o nome, email, senha e foto dentro do objeto para serem cadastrados no banco
+$usuario->inserir();
 
 // redireciona o usuário para a página de login
 header('Location: /biblioteca/views/usuario/login.php');

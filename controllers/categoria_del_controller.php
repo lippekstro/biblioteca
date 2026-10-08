@@ -12,9 +12,12 @@ $id = $_GET['id'];
 // cria um novo objeto da classe Categoria
 $categoria = new Categoria();
 
+// seta o ID que veio do front pra dentro do objeto
+$categoria->setId($id);
+
 // chama o método deletar() da classe Categoria
-// envia o ID da categoria para identificar qual registro será excluído
-$categoria->deletar($id);
+// internamente o metodo deletar vai usar o ID setado no objeto para dizer exatamente o registro a ser deletado
+$categoria->deletar();
 
 // armazena uma mensagem de aviso na sessão
 // essa mensagem pode ser exibida na próxima página

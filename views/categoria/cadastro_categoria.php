@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../templates/_cabecalho.php";
 
         <div class="form-item">
             <label for="nome">Nome Da Categoria</label>
-            <input type="text" name="nome" id="nome">
+            <input type="text" name="nome" id="nome" required>
         </div>
 
         <button type="submit">Cadastrar</button>

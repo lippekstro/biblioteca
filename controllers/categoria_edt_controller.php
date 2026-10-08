@@ -11,12 +11,15 @@ $nome = $_POST['nome'];
 // pega o ID da categoria enviado pelo formulário através do método POST 
 $id = $_POST['id'];
 
-// cria um novo objeto da classe Categoria 
-$categoria = new Categoria();
+// cria um novo objeto da classe Categoria que ja vem carregado com os dados do banco
+$categoria = new Categoria($id);
+
+// seta o nome que veio do front pra dentro do objeto substituindo o que ja estava
+$categoria->setNome($nome);
 
 // chama o método atualizar() da classe Categoria 
-// envia o nome e o ID da categoria para identificar qual registro será atualizado 
-$categoria->atualizar($nome, $id);
+// envia o nome e o ID da categoria dentro do objeto para identificar qual registro será atualizado 
+$categoria->atualizar();
 
 // armazena uma mensagem de aviso na sessão 
 // essa mensagem pode ser exibida na próxima página 

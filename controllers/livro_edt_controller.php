@@ -9,7 +9,12 @@ $autor = $_POST['autor'];
 $resumo = $_POST['resumo'];
 $categoria = $_POST['categoria'];
 
-$livro = new Livro();
+$livro = new Livro($id);
+$livro->setTitulo($titulo);
+$livro->setAno($ano);
+$livro->setAutor($autor);
+$livro->setResumo($resumo);
+$livro->setCategoria($categoria);
 
 if (!empty($_FILES['capa']['name'])) {
     $capa = $_FILES['capa'];
@@ -17,9 +22,10 @@ if (!empty($_FILES['capa']['name'])) {
     $nomedacapa = uniqid() . '.' . $extensao;
     $caminho = __DIR__ . "/../imgs/capas/uploads/" . $nomedacapa;
     move_uploaded_file($capa['tmp_name'], $caminho);
-    $livro->atualizar($titulo, $autor, $ano, $resumo, $nomedacapa, $categoria, $id);
+    $livro->setCapa($nomedacapa);
+    $livro->atualizar();
 } else {
-    $livro->atualizarSemCapa($titulo, $autor, $ano, $resumo, $categoria, $id);
+    $livro->atualizarSemCapa();
 }
 
 

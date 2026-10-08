@@ -134,8 +134,13 @@ if (isset($_FILES['capa']) && $_FILES['capa']['error'] !== UPLOAD_ERR_NO_FILE) {
 // ==================================================
 
 $livro = new Livro();
-
-$livro->inserir($titulo, $ano, $autor, $resumo, $nomedacapa, $cat);
+$livro->setTitulo($titulo);
+$livro->setAno($ano);
+$livro->setAutor($autor);
+$livro->setResumo($resumo);
+$livro->setCategoria($cat);
+$livro->setCapa($nomedacapa);
+$livro->inserir();
 
 // Informa que o livro foi cadastrado com sucesso
 $_SESSION['aviso'] = "Livro inserido com sucesso";

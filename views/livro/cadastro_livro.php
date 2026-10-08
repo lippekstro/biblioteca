@@ -10,17 +10,17 @@ $categorias = Categoria::listar();
 
         <div class="form-item">
             <label for="titulo">Titulo</label>
-            <input type="text" name="titulo" id="titulo">
+            <input type="text" name="titulo" id="titulo" required>
         </div>
 
         <div class="form-item">
             <label for="ano">Ano da Publicacao</label>
-            <input type="text" name="ano" id="ano" max="2026">
+            <input type="text" name="ano" id="ano" max="2026" required>
         </div>
 
         <div class="form-item">
             <label for="autor">Autor</label>
-            <input type="text" name="autor" id="autor">
+            <input type="text" name="autor" id="autor" required>
         </div>
 
         <div class="form-item">

@@ -12,9 +12,12 @@ $nome = $_POST['nome'];
 // cria um novo objeto da classe Categoria
 $categoria = new Categoria();
 
+// seta o nome que veio do front pra dentro do objeto
+$categoria->setNome($nome);
+
 // chama o método inserir() da classe Categoria
-// envia o nome recebido do formulário para ser inserido no banco de dados
-$categoria->inserir($nome);
+// internamente o metodo inserir vai usar o nome setado no objeto para enviar ao banco
+$categoria->inserir();
 
 // armazena uma mensagem de aviso na sessão
 // essa mensagem pode ser exibida na próxima página

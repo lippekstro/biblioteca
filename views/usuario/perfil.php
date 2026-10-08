@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../templates/_cabecalho.php";
             <?php endif; ?>
         </div>
 
-        <?php if(Autenticacao::ehAdmin()): ?>
+        <?php if (Autenticacao::ehAdmin()): ?>
             <div class="itens-perfil">
                 <a href="/biblioteca/views/categoria/gerenciar_categorias.php" class="link-btn">Gerenciar Categorias</a>
                 <a href="/biblioteca/views/livro/gerenciar_livros.php" class="link-btn">Gerenciar Livros</a>

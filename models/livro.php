@@ -19,6 +19,23 @@ class Livro
     private $categoria;
 
     /**
+     * Inicializa um objeto Livro.
+     *
+     * Caso um ID seja informado, define o ID do livro
+     * e carrega seus dados cadastrados.
+     *
+     * @param int|false $id ID do livro a ser carregado. 
+     * Se não informado, cria um objeto vazio.
+     */
+    public function __construct($id = false)
+    {
+        if ($id) {
+            $this->setId($id);
+            $this->carregar();
+        }
+    }
+
+    /**
      * Lista todos os livros cadastrados.
      *
      * Retorna os dados dos livros juntamente com o nome
@@ -88,16 +105,11 @@ class Livro
     /**
      * Insere um novo livro no banco de dados.
      *
-     * @param string $titulo Título do livro.
-     * @param int $ano Ano de publicação do livro.
-     * @param string $autor Nome do autor do livro.
-     * @param string $resumo Resumo do livro.
-     * @param string|null $capa Nome do arquivo da capa ou null caso não possua capa.
-     * @param int $categoria ID da categoria do livro.
      *
      * @return void
      */
-    public function inserir($titulo, $ano, $autor, $resumo, $capa, $categoria) {
+    public function inserir()
+    {
         try {
             // Obtém uma conexão com o banco de dados
             $conexao = Conexao::conectar();
@@ -109,12 +121,12 @@ class Livro
             $stmt = $conexao->prepare($sql);
 
             // Define os valores dos parâmetros da consulta
-            $stmt->bindValue(':titulo', $titulo);
-            $stmt->bindValue(':ano_pub', $ano);
-            $stmt->bindValue(':autor', $autor);
-            $stmt->bindValue(':resumo', $resumo);
-            $stmt->bindValue(':capa', $capa);
-            $stmt->bindValue(':id_categoria', $categoria);
+            $stmt->bindValue(':titulo', $this->titulo);
+            $stmt->bindValue(':ano_pub', $this->ano_pub);
+            $stmt->bindValue(':autor', $this->autor);
+            $stmt->bindValue(':resumo', $this->resumo);
+            $stmt->bindValue(':capa', $this->capa);
+            $stmt->bindValue(':id_categoria', $this->categoria);
 
             // Executa a inserção
             $stmt->execute();
@@ -128,11 +140,10 @@ class Livro
     /**
      * Exclui um livro do banco de dados.
      *
-     * @param int $id ID do livro que será excluído.
      *
      * @return void
      */
-    public function deletar($id)
+    public function deletar()
     {
         try {
             // Obtém uma conexão com o banco de dados
@@ -145,7 +156,7 @@ class Livro
             $stmt = $conexao->prepare($sql);
 
             // Define o ID do livro que será excluído
-            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':id', $this->id_livro);
 
             // Executa a exclusão
             $stmt->execute();
@@ -166,7 +177,7 @@ class Livro
      *
      * @return void
      */
-    public function carregar($id)
+    public function carregar()
     {
         try {
             // Obtém uma conexão com o banco de dados
@@ -179,7 +190,7 @@ class Livro
             $stmt = $conexao->prepare($sql);
 
             // Define o ID do livro
-            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':id', $this->id_livro);
 
             // Executa a consulta
             $stmt->execute();
@@ -191,7 +202,6 @@ class Livro
             // Verifica se um livro foi encontrado
             if ($resultado) {
                 // Preenche os atributos do objeto com os dados encontrados
-                $this->id_livro = $resultado['id_livro'];
                 $this->titulo = $resultado['titulo'];
                 $this->autor = $resultado['autor'];
                 $this->ano_pub = $resultado['ano_pub'];
@@ -208,17 +218,11 @@ class Livro
     /**
      * Atualiza todos os dados de um livro.
      *
-     * @param string $titulo Novo título do livro.
-     * @param string $autor Novo nome do autor.
-     * @param int $ano Novo ano de publicação.
-     * @param string $resumo Novo resumo do livro.
-     * @param string|null $capa Nome do novo arquivo da capa ou null.
-     * @param int $categoria Novo ID da categoria.
-     * @param int $id ID do livro que será atualizado.
      *
      * @return void
      */
-    public function atualizar($titulo, $autor, $ano, $resumo, $capa, $categoria, $id) {
+    public function atualizar()
+    {
         try {
             // Obtém uma conexão com o banco de dados
             $conexao = Conexao::conectar();
@@ -230,13 +234,13 @@ class Livro
             $stmt = $conexao->prepare($sql);
 
             // Define os valores que serão atualizados
-            $stmt->bindValue(':titulo', $titulo);
-            $stmt->bindValue(':autor', $autor);
-            $stmt->bindValue(':ano', $ano);
-            $stmt->bindValue(':resumo', $resumo);
-            $stmt->bindValue(':capa', $capa);
-            $stmt->bindValue(':categoria', $categoria);
-            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':titulo', $this->titulo);
+            $stmt->bindValue(':autor', $this->autor);
+            $stmt->bindValue(':ano', $this->ano_pub);
+            $stmt->bindValue(':resumo', $this->resumo);
+            $stmt->bindValue(':capa', $this->capa);
+            $stmt->bindValue(':categoria', $this->categoria);
+            $stmt->bindValue(':id', $this->id_livro);
 
             // Executa a atualização
             $stmt->execute();
@@ -250,16 +254,11 @@ class Livro
     /**
      * Atualiza os dados de um livro sem alterar sua capa.
      *
-     * @param string $titulo Novo título do livro.
-     * @param string $autor Novo nome do autor.
-     * @param int $ano Novo ano de publicação.
-     * @param string $resumo Novo resumo do livro.
-     * @param int $categoria Novo ID da categoria.
-     * @param int $id ID do livro que será atualizado.
      *
      * @return void
      */
-    public function atualizarSemCapa($titulo, $autor, $ano, $resumo, $categoria, $id) {
+    public function atualizarSemCapa()
+    {
         try {
             // Obtém uma conexão com o banco de dados
             $conexao = Conexao::conectar();
@@ -271,12 +270,12 @@ class Livro
             $stmt = $conexao->prepare($sql);
 
             // Define os valores que serão atualizados
-            $stmt->bindValue(':titulo', $titulo);
-            $stmt->bindValue(':autor', $autor);
-            $stmt->bindValue(':ano', $ano);
-            $stmt->bindValue(':resumo', $resumo);
-            $stmt->bindValue(':categoria', $categoria);
-            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':titulo', $this->titulo);
+            $stmt->bindValue(':autor', $this->autor);
+            $stmt->bindValue(':ano', $this->ano_pub);
+            $stmt->bindValue(':resumo', $this->resumo);
+            $stmt->bindValue(':categoria', $this->categoria);
+            $stmt->bindValue(':id', $this->id_livro);
 
             // Executa a atualização
             $stmt->execute();
@@ -298,6 +297,16 @@ class Livro
     }
 
     /**
+     * Atribui o ID do livro.
+     *
+     * @param int $id do livro.
+     */
+    public function setId($id)
+    {
+        $this->id_livro = $id;
+    }
+
+    /**
      * Retorna o título do livro.
      *
      * @return string Título do livro.
@@ -305,6 +314,16 @@ class Livro
     public function getTitulo()
     {
         return $this->titulo;
+    }
+
+    /**
+     * Atribui o titulo do livro.
+     *
+     * @param string $titulo do livro.
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
     }
 
     /**
@@ -318,6 +337,16 @@ class Livro
     }
 
     /**
+     * Atribui o autor do livro.
+     *
+     * @param string $autor do livro.
+     */
+    public function setAutor($autor)
+    {
+        $this->autor = $autor;
+    }
+
+    /**
      * Retorna o ano de publicação do livro.
      *
      * @return int Ano de publicação.
@@ -325,6 +354,16 @@ class Livro
     public function getAno()
     {
         return $this->ano_pub;
+    }
+
+    /**
+     * Atribui o ano de lançamento do livro.
+     *
+     * @param int $ano do livro.
+     */
+    public function setAno($ano)
+    {
+        $this->ano_pub = $ano;
     }
 
     /**
@@ -338,6 +377,16 @@ class Livro
     }
 
     /**
+     * Atribui o resumo do livro.
+     *
+     * @param string $resumo do livro.
+     */
+    public function setResumo($resumo)
+    {
+        $this->resumo = $resumo;
+    }
+
+    /**
      * Retorna o nome do arquivo da capa.
      *
      * @return string|null Nome do arquivo da capa ou null.
@@ -348,6 +397,16 @@ class Livro
     }
 
     /**
+     * Atribui o nome do arquivo com extensão da capa do livro.
+     *
+     * @param string $capa do livro.
+     */
+    public function setCapa($capa)
+    {
+        $this->capa = $capa;
+    }
+
+    /**
      * Retorna o ID da categoria do livro.
      *
      * @return int ID da categoria.
@@ -355,5 +414,15 @@ class Livro
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    /**
+     * Atribui a categoria do livro.
+     *
+     * @param int $categoria do livro.
+     */
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
     }
 }
