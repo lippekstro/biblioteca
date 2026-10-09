@@ -14,6 +14,7 @@ require_once __DIR__ . "/../../templates/_cabecalho.php";
             <?php else: ?>
                 <img src="/biblioteca/imgs/fotos/uploads/<?= $_SESSION['foto'] ?>" alt="">
             <?php endif; ?>
+            <a href="/biblioteca/views/usuario/editar_foto_perfil.php" class="link-btn">Editar Foto</a>
         </div>
 
         <?php if (Autenticacao::ehAdmin()): ?>
